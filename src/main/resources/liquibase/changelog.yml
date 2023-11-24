@@ -1,0 +1,98 @@
+databaseChangeLog:
+  -  changeSet:
+       id:  1
+       author:  Dubrovina
+       changes:
+         -  createTable:
+              tableName: exchange_rates
+              columns:
+                -  column:
+                     name:  id
+                     type:  UUID
+                     constraints:
+                       primaryKey:  true
+                       nullable:  false
+                - column:
+                    name: date
+                    type: date
+                - column:
+                    name: close
+                    type: decimal(10, 2)
+                - column:
+                    name: currency_quote
+                    type: text
+                - column:
+                    name: currency_base
+                    type: text
+
+  - changeSet:
+      id: 2
+      author: Dubrovina
+      changes:
+        - createTable:
+            tableName: limits
+            columns:
+              - column:
+                  name: id
+                  type: UUID
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: limit_setting_date
+                  type: date
+              - column:
+                  name: limit_value
+                  type: decimal(10, 2)
+              - column:
+                  name: limit_currency_shortname
+                  type: text
+
+  - changeSet:
+      id: 3
+      author: Dubrovina
+      changes:
+        - createTable:
+            tableName: transactions
+            columns:
+              - column:
+                  name: id
+                  type: UUID
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: transaction_amount
+                  type: decimal(10, 2)
+              - column:
+                  name: currency_shortname
+                  type: text
+              - column:
+                  name: date_time
+                  type: timestamp without timezone
+              - column:
+                  name: account_from
+                  type: bigint
+              - column:
+                  name: account_to
+                  type: bigint
+              - column:
+                  name: category
+                  type: text
+              - column:
+                  name: limit_id
+                  type: UUID
+
+  - changeSet:
+      id: 4
+      author: Dubrovina
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: limit_id
+            baseTableName: transactions
+            constraintName: fk_limit_id
+            onDelete: CASCADE
+            onUpdate: CASCADE
+            referencedColumnNames: id
+            referencedTableName: limits
+            validate: true

@@ -1,0 +1,16 @@
+server:
+  port: 8080
+spring:
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/currency_expense_tracker_microservice?currentSchema=app
+    username: postgres
+    password: postgres
+
+  jpa:
+    show-sql: true
+
+  liquibase:
+    change-log: classpath:liquibase/changelog.yml
+
+
