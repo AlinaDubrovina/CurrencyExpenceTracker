@@ -14,7 +14,7 @@ public class CurrencyScheduledTask {
         this.exchangeRateService = exchangeRateService;
     }
 
-    @Scheduled(cron = "0 0 0 * * *")
+    @Scheduled(cron = "1 0 0 * * *")
     public void saveExchangeRatesDaily() {
         exchangeRateService.fetchDataAndSaveToDatabase();
     }
