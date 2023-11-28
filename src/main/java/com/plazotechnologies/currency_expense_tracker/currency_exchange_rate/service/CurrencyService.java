@@ -17,8 +17,7 @@ import java.util.List;
 public class CurrencyService implements ICurrencyService{
     private final IExchangeRateRepository exchangeRateRepository;
     @Autowired
-    public CurrencyService(
-                           IExchangeRateRepository exchangeRateRepository) {
+    public CurrencyService(IExchangeRateRepository exchangeRateRepository) {
         this.exchangeRateRepository = exchangeRateRepository;
     }
 
@@ -33,7 +32,7 @@ public class CurrencyService implements ICurrencyService{
     @Override
     public ExchangeRateData getCurrencyExchangeRate(){
         LocalDate currentDate = LocalDate.now();
-        return exchangeRateRepository.getByDatetime(currentDate);
+        return exchangeRateRepository.getByDate(currentDate);
     }
 
     private ExchangeRateData convertDtoToEntity(ExchangeRateResponseDto exchangeRateResponseDto) {
@@ -49,7 +48,7 @@ public class CurrencyService implements ICurrencyService{
 
         if (!exchangeRateValueDtoList.isEmpty()) {
             ExchangeRateValueDto exchangeRateValueDto = exchangeRateValueDtoList.get(0);
-            exchangeRateData.setDatetime(LocalDate.parse(exchangeRateValueDto.getDatetime()));
+            exchangeRateData.setDate(LocalDate.parse(exchangeRateValueDto.getDatetime()));
             exchangeRateData.setClose(stringToBigDecimal(exchangeRateValueDto.getClose()));
         }
 

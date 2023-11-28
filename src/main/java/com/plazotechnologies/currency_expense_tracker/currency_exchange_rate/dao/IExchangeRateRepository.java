@@ -7,5 +7,5 @@ import java.time.LocalDate;
 import java.util.UUID;
 
 public interface IExchangeRateRepository extends JpaRepository<ExchangeRateData, UUID>{
-    ExchangeRateData getByDatetime(LocalDate datetime);
+    ExchangeRateData getByDate(LocalDate date);
 }
