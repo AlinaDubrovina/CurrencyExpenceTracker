@@ -1,0 +1,9 @@
+FROM maven:3.6.3-openjdk-17
+
+RUN mkdir CurrencyExpenseTrackerMicroservice
+
+WORKDIR CurrencyExpenseTrackerMicroservice
+
+COPY . .
+
+CMD ["mvn", "liquibase:update", "-Pdocker"]
