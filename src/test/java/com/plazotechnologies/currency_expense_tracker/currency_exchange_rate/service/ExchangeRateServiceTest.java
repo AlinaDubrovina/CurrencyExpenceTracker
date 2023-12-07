@@ -3,14 +3,12 @@ package com.plazotechnologies.currency_expense_tracker.currency_exchange_rate.se
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.plazotechnologies.currency_expense_tracker.currency_exchange_rate.core.dto.ExchangeRateResponseDto;
-import com.plazotechnologies.currency_expense_tracker.currency_exchange_rate.dao.IExchangeRateRepository;
-import com.plazotechnologies.currency_expense_tracker.currency_exchange_rate.dao.model.ExchangeRateData;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.web.client.RestTemplate;
 
@@ -38,6 +36,7 @@ public class ExchangeRateServiceTest {
     }
 
     @Test
+    @DisplayName("testFetchDataAndSaveToDatabase")
     public void testFetchDataAndSaveToDatabase() throws JsonProcessingException {
         String mockJsonString = "{\"meta\":{\"currency_base\":\"Russian Ruble\",\"currency_quote\":\"US Dollar\"}" +
                 ",\"values\":[{\"datetime\":\"2023-12-07\",\"close\":\"0.01080\"}]}";
