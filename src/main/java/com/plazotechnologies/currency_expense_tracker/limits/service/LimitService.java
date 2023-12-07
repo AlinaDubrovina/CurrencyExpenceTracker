@@ -27,6 +27,9 @@ public class LimitService implements ILimitService{
     @Override
     @Transactional
     public void createLimit(LimitDto limitDto){
+        LocalDate limitSettingDate = LocalDate.now();
+        limitDto.setLimitSettingDate(limitSettingDate);
+        limitDto.setLastDayOfMonth(limitSettingDate.withDayOfMonth(limitSettingDate.lengthOfMonth()));
         Limit limit = limitMapper.toEntity(limitDto);
         limitRepository.save(limit);
     }
