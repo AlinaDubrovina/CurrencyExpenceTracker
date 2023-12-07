@@ -24,9 +24,9 @@ import static org.mockito.Mockito.times;
 @SpringBootTest
 public class CurrencyServiceTest {
     @MockBean
-    private IExchangeRateRepository exchangeRateRepository;
+    IExchangeRateRepository exchangeRateRepository;
     @Autowired
-    private CurrencyService currencyService;
+    CurrencyService currencyService;
     private static final String CURRENCY_RESOURCES_URL = "https://api.twelvedata.com/time_series?symbol=RUB/USD&interval=1day&outputsize=1&&apikey=75f3681dc08c402ebbf6dbe43c425d45";
 
     @Test
@@ -45,14 +45,6 @@ public class CurrencyServiceTest {
         verify(exchangeRateRepository, times(1)).getByDate(date);
     }
 
-    private ExchangeRateData createExchangeRateData() throws JsonProcessingException {
-        LocalDate localDate = LocalDate.now();
-        ExchangeRateResponseDto exchangeRateResponseDto = createExchangeRateResponseDto();
-        BigDecimal toBigdecimal = new BigDecimal(exchangeRateResponseDto.getValues().get(0).getClose());
-        return new ExchangeRateData(exchangeRateResponseDto.getMeta().getCurrencyBase(), exchangeRateResponseDto.getMeta().getCurrencyQuote(),
-                localDate, toBigdecimal);
-    }
-
     @Test
     @DisplayName("testSaveExchangeRateData")
     void testSaveExchangeRateData() throws JsonProcessingException {
@@ -67,6 +59,13 @@ public class CurrencyServiceTest {
         verify(exchangeRateRepository, times(1)).save(any(ExchangeRateData.class));
     }
 
+    private ExchangeRateData createExchangeRateData() throws JsonProcessingException {
+        LocalDate localDate = LocalDate.now();
+        ExchangeRateResponseDto exchangeRateResponseDto = createExchangeRateResponseDto();
+        BigDecimal toBigdecimal = new BigDecimal(exchangeRateResponseDto.getValues().get(0).getClose());
+        return new ExchangeRateData(exchangeRateResponseDto.getMeta().getCurrencyBase(), exchangeRateResponseDto.getMeta().getCurrencyQuote(),
+                localDate, toBigdecimal);
+    }
     private ExchangeRateResponseDto createExchangeRateResponseDto() throws JsonProcessingException {
         TestRestTemplate testRestTemplate = new TestRestTemplate();
         ObjectMapper objectMapper = new ObjectMapper();

@@ -14,8 +14,8 @@
     <artifactId>CurrencyExpenseTrackerMicroservice</artifactId>
     <version>1.0.0-SNAPSHOT</version>
     <name>CurrencyExpenseTrackerMicroservice</name>
-    <properties>
 
+    <properties>
         <java.version>17</java.version>
     </properties>
 
@@ -39,6 +39,7 @@
         <dependency>
             <groupId>org.liquibase</groupId>
             <artifactId>liquibase-core</artifactId>
+            <version>4.25.0</version>
         </dependency>
 
         <dependency>

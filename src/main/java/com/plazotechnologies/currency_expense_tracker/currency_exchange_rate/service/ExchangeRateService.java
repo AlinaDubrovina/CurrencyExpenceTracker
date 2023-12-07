@@ -30,6 +30,7 @@ public class ExchangeRateService implements IExchangeRateService{
         try {
             ExchangeRateResponseDto exchangeRateResponseDto = objectMapper.readValue(jsonString, ExchangeRateResponseDto.class);
             currencyService.saveExchangeRateData(exchangeRateResponseDto);
+
         } catch (JsonProcessingException e) {
             throw new RuntimeException(e);
         }
